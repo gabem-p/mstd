@@ -1,0 +1,8 @@
+[project]
+name:mstd
+language:c
+flag:shared
+flag:fPIC
+
+[include]
+path:.
