@@ -17,3 +17,5 @@
 #define ulong uint64_t
 
 #define string char*
+
+#define packed [[gnu::packed]]
