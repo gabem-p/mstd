@@ -10,15 +10,15 @@ typedef struct {
     uint length;
     list_node* first;
     list_node* last;
-} list;
+} m_list;
 
-list* list_new() {
-    list* _list = malloc(sizeof(list));
-    _list->length = 0;
-    return _list;
+m_list* m_list_new() {
+    m_list* list = malloc(sizeof(m_list));
+    list->length = 0;
+    return list;
 }
 
-void* list_get(list* list, uint index) {
+void* list_get(m_list* list, uint index) {
     if (index >= list->length)
         return null;
     list_node* node = list->first;
@@ -28,7 +28,7 @@ void* list_get(list* list, uint index) {
     return node->data;
 }
 
-void list_remove(list* list, uint index) {
+void list_remove(m_list* list, uint index) {
     if (index >= list->length)
         return;
     list_node* prev;
@@ -48,7 +48,7 @@ void list_remove(list* list, uint index) {
     list->length--;
 }
 
-void list_add(list* list, void* data) {
+void list_add(m_list* list, void* data) {
     list_node* node = malloc(sizeof(list_node));
     node->data = data;
     node->next = null;
@@ -61,7 +61,7 @@ void list_add(list* list, void* data) {
     list->length++;
 }
 
-void list_set(list* list, uint index, void* data) {
+void list_set(m_list* list, uint index, void* data) {
     if (index >= list->length)
         return;
     list_node* node = list->first;
@@ -71,7 +71,7 @@ void list_set(list* list, uint index, void* data) {
     node->data = data;
 }
 
-int list_index(list* list, void* data) {
+int list_index(m_list* list, void* data) {
     list_node* node = list->first;
     int i = 0;
     while (i++ < list->length) {
@@ -82,7 +82,7 @@ int list_index(list* list, void* data) {
     return -1;
 }
 
-void list_cleanup(list* list) {
+void list_cleanup(m_list* list) {
     list_node* node = list->first;
     int i = 0;
     while (i++ < list->length) {
@@ -93,7 +93,7 @@ void list_cleanup(list* list) {
     free(list);
 }
 
-void list_full_cleanup(list* list) {
+void list_full_cleanup(m_list* list) {
     list_node* node = list->first;
     int i = 0;
     while (i++ < list->length) {
@@ -107,24 +107,24 @@ void list_full_cleanup(list* list) {
 }
 
 typedef struct {
-    list* list;
+    m_list* list;
     list_node* current;
     int index;
-} list_iterator;
+} m_list_iterator;
 
-list_iterator* list_iter_new(list* list) {
-    list_iterator* iterator = malloc(sizeof(list_iterator));
+m_list_iterator* list_iter_new(m_list* list) {
+    m_list_iterator* iterator = malloc(sizeof(m_list_iterator));
     iterator->list = list;
     iterator->current = list->first;
     iterator->index = 0;
     return iterator;
 }
 
-void list_iter_next(list_iterator* iterator) {
+void m_list_iter_next(m_list_iterator* iterator) {
     iterator->current = iterator->current->next;
     iterator->index++;
 }
 
-void* list_iter_get(list_iterator* iterator) { return iterator->current->data; }
+void* m_list_iter_get(m_list_iterator* iterator) { return iterator->current->data; }
 
-void list_iter_cleanup(list_iterator* iterator) { free(iterator); }
+void m_list_iter_cleanup(m_list_iterator* iterator) { free(iterator); }

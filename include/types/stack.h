@@ -3,10 +3,10 @@
 typedef struct {
     uint capacity;
     uint count;
-} stack;
+} m_stack;
 
-stack* stack_new(uint capacity);
-void stack_push(stack* stack, void* item);
-void* stack_pop(stack* stack);
-void* stack_peek(stack* stack);
-void stack_cleanup(stack* stack);
+m_stack* m_stack_new(uint capacity);
+void m_stack_push(m_stack* stack, void* item);
+void* m_stack_pop(m_stack* stack);
+void* m_stack_peek(m_stack* stack);
+void m_stack_cleanup(m_stack* stack);

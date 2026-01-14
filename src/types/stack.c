@@ -4,31 +4,31 @@ typedef struct {
     uint capacity;
     uint count;
     void** items;
-} stack;
+} m_stack;
 
-stack* stack_new(uint capacity) {
-    stack* _stack = malloc(sizeof(stack));
-    _stack->capacity = capacity;
-    _stack->count = 0;
-    _stack->items = calloc(capacity, sizeof(void*));
-    return _stack;
+m_stack* m_stack_new(uint capacity) {
+    m_stack* stack = malloc(sizeof(m_stack));
+    stack->capacity = capacity;
+    stack->count = 0;
+    stack->items = calloc(capacity, sizeof(void*));
+    return stack;
 }
 
-void stack_push(stack* stack, void* item) {
+void m_stack_push(m_stack* stack, void* item) {
     stack->items[stack->count++] = item;
 }
 
-void* stack_pop(stack* stack) {
+void* m_stack_pop(m_stack* stack) {
     void* item = stack->items[--stack->count];
     stack->items[stack->count] = null;
     return item;
 }
 
-void* stack_peek(stack* stack) {
+void* m_stack_peek(m_stack* stack) {
     return stack->items[stack->count - 1];
 }
 
-void stack_cleanup(stack* stack) {
+void m_stack_cleanup(m_stack* stack) {
     free(stack->items);
     free(stack);
 }
